@@ -22,9 +22,7 @@ export function PhoneFrame({ children, label }: PhoneFrameProps) {
                    max-sm:h-screen max-sm:w-screen max-sm:rounded-none max-sm:border-0"
       >
         <div className="absolute left-1/2 top-0 z-20 h-6 w-32 -translate-x-1/2 rounded-b-2xl bg-ink-900 max-sm:hidden" />
-        <div className="phone-scroll flex min-h-0 flex-1 flex-col overflow-y-auto bg-ink-100">
-          {children}
-        </div>
+        <div className="flex min-h-0 flex-1 flex-col overflow-hidden bg-ink-100">{children}</div>
       </div>
     </div>
   );
