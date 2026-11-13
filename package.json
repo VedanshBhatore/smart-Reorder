@@ -7,7 +7,9 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "oxlint",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "test": "vitest run",
+    "test:watch": "vitest"
   },
   "dependencies": {
     "papaparse": "^5.7.1",
@@ -29,7 +31,6 @@
     "autoprefixer": "^10.6.2",
     "jsdom": "^29.1.1",
     "oxlint": "^1.90.0",
-    "playwright": "^1.65.0",
     "postcss": "^8.5.32",
     "tailwindcss": "^4.3.5",
     "typescript": "~7.0.2",
