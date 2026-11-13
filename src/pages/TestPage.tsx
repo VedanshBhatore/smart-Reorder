@@ -174,7 +174,7 @@ function RunningFlow({
 }: RunningFlowProps) {
   return (
     <div className="flex flex-col items-center gap-4 lg:flex-row lg:items-start lg:justify-center">
-      <PhoneFrame label={flowLabel[flowId]}>
+      <PhoneFrame label={flowLabel[flowId]} fullscreenOnMobile={false}>
         <ToastProvider>
           <TapTrackerProvider value={{ recordTap: onTap }}>
             {flowId === "A" ? (
