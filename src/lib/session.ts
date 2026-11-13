@@ -1,6 +1,7 @@
 import type { FlowId } from "./counterbalance";
 import type { FlowMetrics } from "./metrics";
 import { createFlowMetrics } from "./metrics";
+import { readJSON, writeJSON } from "./storage";
 
 export interface FlowResult extends FlowMetrics {
   susAnswers: number[] | null; // 10 Likert answers, 1-5
@@ -39,6 +40,21 @@ export function createTestSession(
   };
 }
 
-const SESSIONS_KEY = "basket.usability.sessions.v1";
+export const SESSIONS_KEY = "basket.usability.sessions.v1";
 
-export { SESSIONS_KEY };
+export function loadSessions(): TestSession[] {
+  return readJSON<TestSession[]>(SESSIONS_KEY, []);
+}
+
+/** Inserts the session, or overwrites the existing one with the same participantId. */
+export function saveSession(session: TestSession): void {
+  const sessions = loadSessions();
+  const idx = sessions.findIndex((s) => s.participantId === session.participantId);
+  if (idx >= 0) sessions[idx] = session;
+  else sessions.push(session);
+  writeJSON(SESSIONS_KEY, sessions);
+}
+
+export function replaceAllSessions(sessions: TestSession[]): void {
+  writeJSON(SESSIONS_KEY, sessions);
+}

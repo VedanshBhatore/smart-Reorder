@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { ReactNode } from "react";
 import { BottomNav } from "../../components/BottomNav";
 import { ScreenHeader } from "../../components/ScreenHeader";
@@ -28,9 +28,15 @@ export function FlowB({ onReachedPlaced, onDone }: FlowBProps) {
   const [overlay, setOverlay] = useState<Overlay>(null);
   const [basket, setBasket] = useState<BasketLine[]>(initialBasket);
 
+  // A ref keeps the effect keyed only on `overlay` — a fresh inline callback
+  // from the caller on every render must not re-fire task completion.
+  const onReachedPlacedRef = useRef(onReachedPlaced);
   useEffect(() => {
-    if (overlay === "placed") onReachedPlaced?.();
-  }, [overlay, onReachedPlaced]);
+    onReachedPlacedRef.current = onReachedPlaced;
+  });
+  useEffect(() => {
+    if (overlay === "placed") onReachedPlacedRef.current?.();
+  }, [overlay]);
 
   function toggle(productId: string) {
     setBasket((prev) =>
