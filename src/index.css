@@ -1,0 +1,53 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", "Segoe UI", system-ui, sans-serif;
+  --font-display: "Fraunces", "Georgia", serif;
+
+  /* "Basket" brand palette — deliberately not Swiggy/Instamart's orange+purple. */
+  --color-basket-50: #f1fbf6;
+  --color-basket-100: #dcf5e7;
+  --color-basket-200: #b4e8cd;
+  --color-basket-300: #80d4ac;
+  --color-basket-400: #4cbb8b;
+  --color-basket-500: #279e6d;
+  --color-basket-600: #1a7f58;
+  --color-basket-700: #16654a;
+  --color-basket-800: #14503c;
+  --color-basket-900: #123f32;
+  --color-basket-950: #08231c;
+
+  --color-ink-900: #16181d;
+  --color-ink-700: #3a3f47;
+  --color-ink-500: #6b7280;
+  --color-ink-300: #cbd1d9;
+  --color-ink-100: #f3f5f7;
+
+  --color-accent-500: #d97a3f;
+  --color-accent-600: #bd6329;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-ink-100 text-ink-900 font-sans antialiased;
+}
+
+/* Thin scrollbars inside the phone frame, so the prototypes feel app-like. */
+.phone-scroll::-webkit-scrollbar {
+  width: 4px;
+}
+.phone-scroll::-webkit-scrollbar-thumb {
+  background: var(--color-ink-300);
+  border-radius: 4px;
+}
+
+@keyframes toast-in {
+  from { opacity: 0; transform: translate(-50%, 8px); }
+  to { opacity: 1; transform: translate(-50%, 0); }
+}
+.animate-toast-in {
+  animation: toast-in 180ms ease-out;
+}
